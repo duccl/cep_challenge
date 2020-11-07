@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cep_challenge", "cep_challenge.csproj", "{2AFBF5BC-AB51-49A0-A063-1E78792E4764}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2AFBF5BC-AB51-49A0-A063-1E78792E4764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AFBF5BC-AB51-49A0-A063-1E78792E4764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AFBF5BC-AB51-49A0-A063-1E78792E4764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AFBF5BC-AB51-49A0-A063-1E78792E4764}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E334BB24-5D81-49A9-A94B-FD3667B0F38F}
+	EndGlobalSection
+EndGlobal
