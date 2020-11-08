@@ -8,8 +8,7 @@ namespace cep_challenge
         static void Main(string[] args)
         {
             Logger.LogInitialStep();
-            //Model excel_model = new Model(args[0]);
-            Model excel_model = new Model(@"C:\Users\ecoltri2\OneDrive - DXC Production\Desktop\Lista_de_CEPs.xlsx");
+            Model excel_model = new Model(args[0]);
             Model CEP_informations_collected = new Model();
             CEP_informations_collected.Create_excel_header(ConfigurationManager.AppSettings["cep_excel_output_headers"].Split(';'));
             Controller controller = new Controller();
