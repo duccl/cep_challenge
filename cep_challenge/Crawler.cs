@@ -61,7 +61,7 @@ namespace cep_challenge
             Logger.LogAStep($"END OF SEARCHING FOR CEP {cep}");
         }
 
-        public  List<string> Get_CEP_informations()
+        public List<string> Get_CEP_informations()
         {
             wait_for_element(By.XPath("//h3[text()='Busca CEP - Endereço']"));
             if (driver.FindElements(dados_nao_encontrados_selector).Count == 1) return new List<string>();

@@ -25,7 +25,7 @@ namespace cep_challenge
             Console.WriteLine($"[{DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm:ss")} || {level}] {message}");
         }
 
-        static public void LogInitialStep()
+        static public async void LogInitialStep()
         {
             string message = $"START {Directory.GetCurrentDirectory()}";
             string path = GetStatusLogPath();
@@ -33,21 +33,21 @@ namespace cep_challenge
             File.AppendAllText(path, $"{message},{DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm:ss")}\n");
         }
 
-        static public void LogAStep(string message)
+        static public async void LogAStep(string message)
         {
             string path = GetStatusLogPath();
             PrintStepToConsole(message, INFO_LEVEL);
             File.AppendAllText(path, $"SUBSTEP,{DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm:ss")},{message}\n");
         }
 
-        static public void LogErrorStep(string message)
+        static public async void LogErrorStep(string message)
         {
             string path = GetErrorLogPath();
             PrintStepToConsole(message, ERROR_LEVEL);
             File.WriteAllText(path, $"SUBSTEP,{DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm:ss")},{message}\n");
         }
 
-        static public void LogEndStep()
+        static public async void LogEndStep()
         {
             string path = GetStatusLogPath();
             string message = "END";

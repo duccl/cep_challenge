@@ -48,6 +48,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CEP.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Crawler.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Model.cs" />
