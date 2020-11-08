@@ -22,7 +22,7 @@ namespace cep_challenge
 
         static private void PrintStepToConsole(string message, string level)
         {
-            Console.WriteLine($"[{DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm:ss")} || {level}] {message}");
+            Console.WriteLine($"[{DateTime.UtcNow.ToString("dd/MM/yyyy hh:mm:ss:ffff")} || {level}] {message}");
         }
 
         static public async void LogInitialStep()
