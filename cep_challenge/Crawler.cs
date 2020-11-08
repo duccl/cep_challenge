@@ -27,7 +27,7 @@ namespace cep_challenge
                                   "--incognito");
             Logger.LogAStep($"STARTING CHROME DRIVER");
             driver = new ChromeDriver(driverService, options, TimeSpan.FromSeconds(240));
-            driver.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(30));
+            driver.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(120));
             Logger.LogAStep($"CHROME DRIVER SUCCESSFULY STARTED");
             wait_threshold = 14000;
             cep_field_at_correios = By.CssSelector("input[name='relaxation']");
