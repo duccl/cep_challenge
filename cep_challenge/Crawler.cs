@@ -1,85 +1,56 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Configuration;
+using System.Threading.Tasks;
+using System.Net;
+using HtmlAgilityPack;
 
 namespace cep_challenge
 {
     class Crawler
     {
-        private ChromeDriver driver;
-        private int wait_threshold;
-        private By cep_field_at_correios;
-        private By cep_informations_at_correios;
-        private By dados_nao_encontrados_selector;
+        HttpClient client;
+        HtmlDocument document;
+
         public Crawler()
         {
-            Logger.LogAStep($"STARTING DRIVER SERVICE");
-            var driverService = ChromeDriverService.CreateDefaultService(ConfigurationManager.AppSettings["chromedriver_location"]);
-            Logger.LogAStep($"DRIVER SERVICE SUCCESSFULY STARTED");
-            ChromeOptions options = new ChromeOptions();
-            options.AddArguments(
-                                  "--headless",
-                                  "--no-sandbox",
-                                  "--lang=pt-br",
-                                  "--incognito");
-            Logger.LogAStep($"STARTING CHROME DRIVER");
-            driver = new ChromeDriver(driverService, options, TimeSpan.FromSeconds(240));
-            driver.Manage().Timeouts().PageLoad.Add(TimeSpan.FromSeconds(120));
-            Logger.LogAStep($"CHROME DRIVER SUCCESSFULY STARTED");
-            wait_threshold = 14000;
-            cep_field_at_correios = By.CssSelector("input[name='relaxation']");
-            cep_informations_at_correios = By.CssSelector("tbody > tr:nth-child(2) > td");
-            dados_nao_encontrados_selector = By.XPath("//p[text()='DADOS NAO ENCONTRADOS']");
+            document = new HtmlDocument();
+            client = new HttpClient();
         }
 
-        private void wait_for_element(By by)
+        private FormUrlEncodedContent Create_CEP_payload(int cep)
         {
-            int cont = 0;
-            while (cont < wait_threshold)
-            {
-                try
+            return new FormUrlEncodedContent(
+                new Dictionary<string, string>
                 {
-                    driver.FindElement(by);
-                    return;
+                    { "relaxation",$"{cep}"},
+                    { "semelhante","N"},
+                    { "tipoCEP", "ALL"},
                 }
-                catch
-                {
-                    System.Threading.Thread.Sleep(100);
-                    cont++;
-                }
-            }
+            );
+        }
+        public async Task Retrive_CEP_informations_request_and_load_it(int cep)
+        {
+            var payload = Create_CEP_payload(cep);
+            var response = await client.PostAsync(ConfigurationManager.AppSettings["cep_correios_post_url"],payload);
+            var content = await response.Content.ReadAsStringAsync();
+            document.LoadHtml(content);
         }
 
-        public void Search_CEP(int cep)
+        public async void Get_CEP_informations(int cep)
         {
             Logger.LogAStep($"SEARCHING FOR CEP {cep}");
-            driver.FindElement(cep_field_at_correios).SendKeys($"{cep}");
-            driver.FindElement(By.CssSelector("input[value='Buscar']")).Click();
+            await Retrive_CEP_informations_request_and_load_it(cep);
+            var cep_informations = document.DocumentNode.SelectNodes(ConfigurationManager.AppSettings["cep_informations_at_correios_selector"])
+                                            .Cast<HtmlNode>()
+                                            .Select(element => element.InnerHtml.Trim())
+                                            .ToList();
             Logger.LogAStep($"END OF SEARCHING FOR CEP {cep}");
-        }
-
-        public List<string> Get_CEP_informations()
-        {
-            wait_for_element(By.XPath("//h3[text()='Busca CEP - Endereço']"));
-            if (driver.FindElements(dados_nao_encontrados_selector).Count == 1) return new List<string>();
-            return driver.FindElements(cep_informations_at_correios).Select(element => element.Text).ToList();
-        }
-
-        public void Go_to_correios()
-        {
-            Logger.LogAStep($"VISITING CORREIOS");
-            driver.Url = ConfigurationManager.AppSettings["cep_correios_home_page"];
-            wait_for_element(cep_field_at_correios);
-            Logger.LogAStep($"END OF VISITING CORREIOS");
-        }
-
-        ~Crawler()
-        {
-            driver.Close();
-            driver.Quit();
+            Logger.LogAStep($"STARTING TO SAVE {cep}");
+            Program.CEP_informations_collected.Add_CEP_informations(cep_informations,cep);
+            Logger.LogAStep($"ENDING TO SAVE {cep}");
+            System.Threading.Thread.Sleep(100);
         }
     }
 }

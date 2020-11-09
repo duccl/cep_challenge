@@ -5,17 +5,15 @@
         public void Process_CEPs(ref Model excel_model, ref Model CEP_informations, ref Crawler crawler)
         {
             Logger.LogAStep("STARTING TO PROCESS CEPS");
-            for (int i = 2; i < excel_model.Get_last_row(); i++)
+            for (int i = 2; i < Program.excel_model.Get_last_row(); i++)
             {
                 Logger.LogAStep($"STARTING TO PROCESS CEPS OF RANGE {i}");
-                int initial_cep_of_range = excel_model.Retrieve_CEP(i, 2);
-                int last_cep_of_range = excel_model.Retrieve_CEP(i, 3);
+                int initial_cep_of_range = Program.excel_model.Retrieve_CEP(i, 2);
+                int last_cep_of_range = Program.excel_model.Retrieve_CEP(i, 3);
                 for (int current_cep = initial_cep_of_range; current_cep <= last_cep_of_range; current_cep++)
                 {
                     //pesquisa cep e guarda no model de CEPS
-                    crawler.Search_CEP(current_cep);
-                    CEP_informations.Add_CEP_informations(crawler.Get_CEP_informations(),current_cep);
-                    crawler.Go_to_correios();
+                    Program.crawler.Get_CEP_informations(current_cep);
                 }
                 Logger.LogAStep($"ENDING TO PROCESS CEPS OF RANGE {i}");
             }

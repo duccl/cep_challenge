@@ -1,11 +1,12 @@
 C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\bin\Debug\cep_challenge.exe.config
 C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\bin\Debug\cep_challenge.exe
 C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\bin\Debug\cep_challenge.pdb
-C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\bin\Debug\WebDriver.dll
-C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\bin\Debug\WebDriver.xml
 C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\obj\Debug\cep_challenge.csprojAssemblyReference.cache
 C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\obj\Debug\cep_challenge.csproj.ResolveComReference.cache
 C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\obj\Debug\cep_challenge.csproj.CoreCompileInputs.cache
-C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\obj\Debug\cep_challenge.csproj.CopyComplete
 C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\obj\Debug\cep_challenge.exe
 C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\obj\Debug\cep_challenge.pdb
+C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\bin\Debug\HtmlAgilityPack.dll
+C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\bin\Debug\HtmlAgilityPack.xml
+C:\Users\ecoltri2\source\repos\cep_challenge\cep_challenge\obj\Debug\cep_challenge.csproj.CopyComplete
